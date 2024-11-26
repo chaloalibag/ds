@@ -1,0 +1,730 @@
+------------------------------Linked List-------------------------------------
+
+# Create a Node class to create a node
+class Node:
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+
+# Create a LinkedList class
+
+class LinkedList:
+	def __init__(self):
+		self.head = None
+
+	# Method to add a node at begin of LL
+	def insertAtBegin(self, data):
+		new_node = Node(data)
+		if self.head is None:
+			self.head = new_node
+			return
+		else:
+			new_node.next = self.head
+			self.head = new_node
+
+	# Method to add a node at any index
+	# Indexing starts from 0.
+	def insertAtIndex(self, data, index):
+		new_node = Node(data)
+		current_node = self.head
+		position = 0
+		if position == index:
+			self.insertAtBegin(data)
+		else:
+			while(current_node != None and position+1 != index):
+				position = position+1
+				current_node = current_node.next
+				
+
+			if current_node != None:
+				new_node.next = current_node.next
+				current_node.next = new_node
+			else:
+				print("Index not present")
+
+	# Method to add a node at the end of LL
+
+	def insertAtEnd(self, data):
+		new_node = Node(data)
+		if self.head is None:
+			self.head = new_node
+			return
+
+		current_node = self.head
+		while(current_node.next):
+			current_node = current_node.next
+
+		current_node.next = new_node
+
+	# Print the size of linked list
+	def sizeOfLL(self):
+		size = 0
+		if(self.head):
+			current_node = self.head
+			while(current_node):
+				size = size+1
+				current_node = current_node.next
+			return size
+		else:
+			return 0
+
+	# print method for the linked list
+	def printLL(self):
+		current_node = self.head
+		while(current_node):
+			print(current_node.data)
+			current_node = current_node.next
+
+
+# create a new linked list
+llist = LinkedList()
+
+# add nodes to the linked list
+llist.insertAtEnd('a')
+llist.insertAtEnd('b')
+llist.insertAtBegin('c')
+llist.insertAtEnd('d')
+llist.insertAtIndex('g', 2)
+
+# print the linked list
+print("Node Data")
+llist.printLL()
+
+print("\nSize of linked list :", end=" ")
+print(llist.sizeOfLL())
+
+
+--------------------------------Circular LinkedList -------------------------------------
+
+class Node:
+        def __init__(self,data):
+                self.data=data
+                self.next=None
+class circularlinkedlist:
+        def __init__(self):
+                self.head=None
+        def insert_at_begin(self,data):
+                new_node=Node(data)
+                if self.head is None:
+                        self.head=new_node
+                        new_node.next=self.head
+                else:
+                        current=self.head
+                        while current.next !=self.head:
+                                current=current.next 
+                        current.next=new_node
+                        new_node.next=self.head
+                        self.head=new_node
+                print(f"Inserted {data} at beginning.")
+        def insert_at_position(self,data,position):
+                new_node=Node(data)
+                if position==0:
+                        self.insert_at_begin(data)
+                else:
+                        current=self.head
+                        count=0
+                        while count<position-1:
+                                current=current.next
+                                count+1
+                        new_node.next=current.next
+                        current.next=new_node
+                print(f"Inserted {data} at position {position}.")
+        def insert_at_end(self,data):
+                new_node=Node(data)
+                if self.head is None:
+                        self.head=new_node
+                        new_node.next=self.head
+                else:
+                        current=self.head
+                        while current.next !=self.head:
+                                current=current.next
+                        current.next=new_node
+                        new_node.next=self.head
+                print(f"Inserted {data} at end.")
+
+        def delete_at_begin(self):
+                if self.head is None:
+                        return
+                else:
+                        current=self.head
+                        while current.next!=self.head:
+                                current=current.next
+                        current.next=self.head.next
+                        self.head=self.head.next
+                print("Deleted node from beginning.")
+        def delete_at_position(self,position):
+                if position==0:
+                        self.delete_at_begin()
+                else:
+                        current=self.head
+                        count=0
+                        while count<position-1:
+                                current=current.next
+                                count+=1
+                        current.next=current.next.next
+                print(f"Deleted node from position {position}.")
+        def delete_at_end(self):
+                if self.head is None:
+                        return
+                else:
+                        current=self.head
+                        previous=None
+                        while current.next!=self.head:
+                                previous=current
+                                current=current.next
+                        previous.next=self.head
+                print("Deleted node from end.")
+        def display(self):
+                current=self.head
+                while True:
+                        print(current.data,end=" ")
+                        current=current.next
+                        if current==self.head:
+                                break
+                print()
+
+cll=circularlinkedlist()
+cll.insert_at_begin(1)
+cll.insert_at_begin(2)
+cll.insert_at_end(3)
+cll.insert_at_position(4,1)
+cll.display()
+cll.delete_at_begin()
+cll.display()
+cll.delete_at_position(1)
+cll.display()
+cll.delete_at_end()
+cll.display()
+
+
+------------------------------Doubly LinkedList--------------------------------------
+
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_begin(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        print(f"Inserted {data} at beginning.")
+
+    def insert_at_position(self, data, position):
+        new_node = Node(data)
+        if position == 0:
+            self.insert_at_begin(data)
+        else:
+            current = self.head
+            count = 0
+            while count < position - 1:
+                current = current.next
+                count += 1
+            new_node.next = current.next
+            new_node.prev = current
+            if current.next:
+                current.next.prev = new_node
+            current.next = new_node
+            print(f"Inserted {data} at position {position}.")
+
+    def insert_at_end(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+            new_node.prev = current
+            print(f"Inserted {data} at end.")
+
+    def delete_at_begin(self):
+        if self.head is None:
+            print("List is empty.")
+        else:
+            self.head = self.head.next
+            if self.head:
+                self.head.prev = None
+            print("Deleted node from beginning.")
+
+    def delete_at_position(self, position):
+        if position == 0:
+            self.delete_at_begin()
+        else:
+            current = self.head
+            count = 0
+            while count < position - 1:
+                current = current.next
+                count += 1
+            current.next = current.next.next
+            if current.next:
+                current.next.prev = current
+            print(f"Deleted node from position {position}.")
+
+    def delete_at_end(self):
+        if self.head is None:
+            print("List is empty.")
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.prev.next = None
+            print("Deleted node from end.")
+
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+        print("Display complete.")
+
+# Example usage:
+dll = DoublyLinkedList()
+dll.insert_at_begin(1)
+dll.insert_at_begin(2)
+dll.insert_at_end(3)
+dll.insert_at_position(4, 1)
+dll.display()  # Output: 2 4 1 3
+dll.delete_at_begin()
+dll.display()  # Output: 4 1 3
+dll.delete_at_position(1)
+dll.display()  # Output: 4 3
+dll.delete_at_end()
+dll.display()  # output: 4
+
+
+----------------------------------------Stack-------------------------------------------
+
+class Stack:
+    def __init__(self):
+        self.stack=[]
+    def push(self,value):
+        self.stack.append(value)
+        print(f"Pushed {value}onto the stack")
+    def pop(self):
+        if self.is_empty():
+            print("Stack is empty")
+            return None
+        value=self.stack.pop()
+        print(f"Popped {value} from the stack")
+        return value
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty")
+            return None
+        print(f"Top element:{self.stack[-1]}")
+        return self.stack[-1]
+    def is_empty(self):
+        print("Stack is empty" if len(self.stack)==0 else "Stack is not empty")
+        return len(self.stack)==0
+    def  size(self):
+        print(f"Stack size:{len(self.stack)}")
+        return len(self.stack)
+
+stack=Stack()
+stack.is_empty()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+stack.peek()
+stack.pop()
+stack.size()
+stack.is_empty()
+stack.pop()
+stack.pop()
+stack.is_empty()
+
+
+-------------------------------------------Binary Tree---------------------------------
+
+class Node:
+   def __init__(self, data):
+      self.left = None
+      self.right = None
+      self.data = data
+# Insert Node
+   def insert(self, data):
+      print("sd:",self.data)
+      print("d:",data)
+      if self.data:
+          if data < self.data:
+            if self.left is None:
+               self.left = Node(data)
+            else:
+               self.left.insert(data)
+          elif data > self.data:
+            if self.right is None:
+               self.right = Node(data)
+            else:
+               self.right.insert(data)
+          else:
+             self.data = data
+
+# Inorder traversal
+# Left -> Root -> Right
+   def inorderTraversal(self, root):
+      res = []
+      if root:
+         res = self.inorderTraversal(root.left)
+         res.append(root.data)
+         res = res + self.inorderTraversal(root.right)
+      return res
+
+# Preorder traversal
+# Left -> Root -> Right
+   def preOrderTraversal(self, root):
+      res = []
+      if root:
+          res.append(root.data)
+          res = res + self.preOrderTraversal(root.left)
+          res = res + self.preOrderTraversal(root.right)
+      return res
+
+   def postOrderTraversal(self, root):
+      res = []
+      if root:
+          res = res + self.postOrderTraversal(root.left)
+          res = res + self.postOrderTraversal(root.right)
+          res.append(root.data)
+      return res
+    
+root = Node(27)
+root.insert(14)
+root.insert(35)
+root.insert(10)
+root.insert(19)
+root.insert(31)
+root.insert(42)
+print(root.inorderTraversal(root))
+print(root.preOrderTraversal(root))
+print(root.postOrderTraversal(root))
+
+------------------------------------------AVL TREE-------------------------------------
+
+# Python code to insert a node in AVL tree 
+class TreeNode(object): 
+	def __init__(self, val): 
+		self.val = val 
+		self.left = None
+		self.right = None
+		self.height = 1
+
+class AVL_Tree(object): 
+ 
+	def insert(self, root, key): 
+	
+		# Step 1 - Perform normal BST 
+		if not root: 
+			return TreeNode(key) 
+		elif key < root.val: 
+			root.left = self.insert(root.left, key) 
+		else: 
+			root.right = self.insert(root.right, key) 
+
+		# Step 2 - Update the height of the ancestor node 
+		root.height = 1 + max(self.getHeight(root.left),self.getHeight(root.right)) 
+
+		# Step 3 - Get the balance factor 
+		balance = self.getBalance(root) 
+
+		# Step 4 - If the node is unbalanced, 
+		# then try out the 4 cases 
+		# Case 1 - Left Left 
+		if balance > 1 and key < root.left.val: 
+			return self.rightRotate(root) 
+
+		# Case 2 - Right Right 
+		if balance < -1 and key > root.right.val: 
+			return self.leftRotate(root) 
+
+		# Case 3 - Left Right 
+		if balance > 1 and key > root.left.val: 
+			root.left = self.leftRotate(root.left) 
+			return self.rightRotate(root) 
+
+		# Case 4 - Right Left 
+		if balance < -1 and key < root.right.val: 
+			root.right = self.rightRotate(root.right) 
+			return self.leftRotate(root) 
+
+		return root 
+
+	def leftRotate(self, z): 
+
+		y = z.right 
+		T2 = y.left
+		print('y',y.val)
+		print('T2',T2)
+
+		# Perform rotation 
+		y.left = z 
+		z.right = T2
+		
+		# Update heights 
+		z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right)) 
+		y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right)) 
+
+		# Return the new root 
+		return y 
+
+	def rightRotate(self, z): 
+
+		y = z.left 
+		T3 = y.right 
+
+		# Perform rotation 
+		y.right = z 
+		z.left = T3 
+
+		# Update heights 
+		z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right)) 
+		y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right)) 
+
+		# Return the new root 
+		return y 
+
+	def getHeight(self, root): 
+		if not root: 
+			return 0
+
+		return root.height 
+
+	def getBalance(self, root): 
+		if not root: 
+			return 0
+
+		return self.getHeight(root.left) - self.getHeight(root.right) 
+
+	def preOrder(self, root): 
+
+		if not root: 
+			return
+
+		print("{0} ".format(root.val), end="") 
+		self.preOrder(root.left) 
+		self.preOrder(root.right) 
+
+myTree = AVL_Tree() 
+root = None
+
+root = myTree.insert(root, 10) 
+root = myTree.insert(root, 20) 
+root = myTree.insert(root, 30) 
+root = myTree.insert(root, 40) 
+root = myTree.insert(root, 50) 
+root = myTree.insert(root, 25) 
+
+# Preorder Traversal 
+print("Preorder traversal of the","constructed AVL tree is") 
+myTree.preOrder(root) 
+print() 
+
+
+----------------------------------------
+
+
+
+
+--------------------------------------Searching-------------------------------------------
+
+------------------------------BFS-------------------------------------------
+
+def bfs(graph,node,path=[ ],index=0):
+    path+=[node]
+    try:
+        while (True):
+            for neighbour in graph[path[index]]:
+                if  neighbour not in path:
+                    path+=[neighbour]
+            index+=1
+    except IndexError:
+        return path
+graph1={
+                 'A':['B','C'],
+                 'B':[ 'A', 'D', 'E'],
+                 'C':['A' ,'E', 'F'],
+                 'D':['B','G','H'],
+                 'E':['B', 'C', 'I'],
+                 'F':['C'],
+                 'G':['D'],
+                 'H':['D'],
+                 'I':['E']
+                 }
+print(bfs(graph1,'A'))
+
+-----------------------------------------DFS---------------------------------------
+
+def dfs(graph,node,path=[ ]):
+    path+=[node]
+    for neighbour in graph[node]:
+        if  neighbour not in path:
+            path=dfs(graph,neighbour,path)
+    return path
+graph1={
+                 'A':['B','C'],
+                 'B':[ 'A', 'D', 'E'],
+                 'C':['A' ,'E', 'F'],
+                 'D':['B','G','H'],
+                 'E':['B', 'C', 'I'],
+                 'F':['C'],
+                 'G':['D'],
+                 'H':['D'],
+                 'I':['E']
+                 }
+print(dfs(graph1,'A'))
+
+
+
+
+
+---------------------------linear_unordered_search----------------------------------
+
+
+def linear_unordered_search(list1, n, key):
+    for i in range(0,n):
+            if(list1[i] == key):
+                return i
+    return -1
+list1 = [1,10,4,9,5,7]
+key = 4
+n = len(list1)
+result = linear_unordered_search(list1, n, key)
+if(result == -1):
+    print("Element not found")
+else:
+    print("Element found at index:", result)
+
+
+-------------------------------------linear_ordered_search--------------------------------
+
+def linear_ordered_search(list1, n, key):
+    for i in range(0,n):
+            if(list1[i] == key):
+                return i
+            elif(list1[i] > key):
+                return -1
+    return -1
+list1 = [1,3,4,9,5,7]
+key = 3
+n = len(list1)
+result = linear_ordered_search(list1, n, key)
+if(result == -1):
+    print("Element not found")
+else:
+    print("Element found at index:", result)
+
+
+----------------------------------------binary_search-------------------------------
+
+def binary_search(arr, low, high, x):
+    if high >= low:
+        mid = (high+low) // 2
+        if arr[mid] == x:
+            return mid
+        elif arr[mid] >x:
+            return binary_search(arr, low, mid-1, x)
+        else:
+            return binary_search(arr, mid+1, high, x)
+    else:
+        return -1
+arr = [2,3,4,10,40]
+x = 10
+result = binary_search(arr,0,len(arr)-1, x)
+if result!=-1:
+    print("Element is present at index", str(result))
+else:
+    print("Element is not present in the array")
+            
+
+
+-----------------------------------------------SORTING------------------------------------
+
+-----------------------------------------insertion sort--------------------------------
+
+def insertion_sort(arr):
+    
+    for i in range(1, len(arr)):
+        key = arr[i] 
+        j = i - 1  
+        
+        
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        
+        
+        arr[j + 1] = key
+
+    return arr
+
+arr = [12, 11, 13, 5, 6]
+
+
+print("Original Array:", arr)
+
+sorted_arr = insertion_sort(arr)
+
+print("Sorted Array:", sorted_arr)
+
+
+------------------------------------------------selection sort--------------------------------
+
+
+def selection_sort(arr):
+    n = len(arr)
+    
+    for i in range(n):
+        min_idx = i
+        
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+    return arr
+arr = [64, 25, 12, 22, 11]
+
+print("Original Array:", arr)
+
+sorted_arr = selection_sort(arr)
+
+print("Sorted Array:", sorted_arr)
+
+
+--------------------------------------------bubble sort---------------------------------
+
+def bubble_sort(arr):
+    n = len(arr)
+    
+    for i in range(n):
+        swapped = False
+        
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        
+        if not swapped:
+            break
+
+    return arr
+
+
+arr = [64, 34, 25, 12, 22, 11, 90]
+print("unsorted list:",arr)
+
+sorted_arr = bubble_sort(arr)
+
+print("Sorted array:", sorted_arr)

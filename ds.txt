@@ -1,3 +1,64 @@
+--------------------------Fib Loop--------------------------------
+
+def fib(n):
+    a=0
+    b=1
+    if n==1:
+        print(a)
+    else:
+        print(a)
+        print(b)
+        for i in range(2,n):
+            c=a+b
+            a=b
+            b=c
+            print(c)
+fib(8)
+
+-------------------------------Fib Recursion------------------------
+
+
+def fib(n):
+    if n<=1:
+        return n
+    else:
+        return fib(n-1)+fib(n-2)
+
+nterms=10
+if nterms<=0:
+    print("Please enter a positive integer")
+else:
+    for i in range(nterms):
+        print(fib(i))
+
+----------------------------------Fact Loop--------------------------------
+
+
+n=5
+fact=1
+if n==0:
+    print("Factorial of 0 is 1")
+else:
+    for i in range(1,n+1):
+        fact=fact*i
+    print("Factorial of",n,"is",fact)
+
+
+----------------------------------Fact Recursion-------------------------
+
+def fact(n):
+    if n==0:
+        return 1
+    else:
+        return n*fact(n-1)
+
+print(fact(6))
+
+
+
+
+
+
 ------------------------------Linked List-------------------------------------
 
 # Create a Node class to create a node
@@ -531,7 +592,164 @@ myTree.preOrder(root)
 print() 
 
 
-----------------------------------------
+----------------------------------------APPLICATION OF QUEUE---------------------------------------------
+
+class Queue:
+    def __init__(self):
+        self.items=[]
+
+    def is_empty(self):
+        return len(self.items)==0
+
+    def enqueue(self,item):
+        self.items.append(item)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+        else:
+            return None
+
+    def display(self):
+        return self.items
+
+q=Queue()
+
+#enqueue elements
+q.enqueue("Apple")
+q.enqueue("Banana")
+q.enqueue("Cherry")
+
+#display
+print("Queue:",q.display())
+
+print("Dequeued:",q.dequeue())
+print("Dequeued:",q.dequeue())
+
+print("Queue after dequeue:",q.display())
+
+q.enqueue("Date")
+q.enqueue("Elderberry")
+
+print("Updated queue:",q.display())
+
+
+--------------------------------BASIC OPERATIONS OF QUEUE---------------------------------------------
+
+
+class queue:
+    def __init__(self):
+        self.queue=[]
+
+    def enqueue(self,value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.is_empty():
+           return None
+        return self.queue.pop(0)
+
+    def is_empty(self):
+        return len(self.queue)==0
+
+    def size(self):
+        return len(self.queue)
+    
+    def peek(self):
+        if self.is_empty():
+            return None
+        return self.queue[0]
+q=queue()
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+print(q.queue)
+print(q.dequeue())
+print(q.queue)
+print(q.is_empty())
+print(q.size())
+print(q.peek())
+
+
+-----------------------------------------Threaded Binary Tree---------------------------------
+
+class Node:
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left = left
+        self.right = right
+ 
+        self.isThreaded = False
+ 
+ 
+def leftMostNode(root):
+ 
+    node = root
+    while node and node.left:
+        node = node.left
+    return node
+ 
+ 
+def traverse(root):
+ 
+    # base case
+    if root is None:
+        return
+ 
+    curr = leftMostNode(root)
+    while curr:
+ 
+        print(curr.data, end=' ')
+ 
+        if curr.isThreaded:
+            curr = curr.right
+        else:
+            curr = leftMostNode(curr.right)
+ 
+ 
+def populateNext(curr, prev):
+ 
+    if curr is None:
+        return prev
+ 
+    prev = populateNext(curr.left, prev)
+ 
+    if prev and prev.right is None:
+ 
+        prev.right = curr
+ 
+        prev.isThreaded = True
+ 
+    prev = curr
+ 
+    prev = populateNext(curr.right, prev)
+    return prev
+ 
+ 
+def convertToThreaded(root):
+ 
+    prev = None
+    populateNext(root, prev)
+ 
+ 
+if __name__ == '__main__':
+ 
+    
+ 
+    root = Node(5)
+    root.left = Node(2)
+    root.right = Node(7)
+    root.left.left = Node(1)
+    root.left.right = Node(4)
+    root.right.left = Node(6)
+    root.right.right = Node(9)
+    root.left.right.left = Node(3)
+    root.right.right.left = Node(8)
+    root.right.right.right = Node(10)
+ 
+    convertToThreaded(root)
+    traverse(root)
+ 
 
 
 

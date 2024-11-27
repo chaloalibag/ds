@@ -946,3 +946,45 @@ print("unsorted list:",arr)
 sorted_arr = bubble_sort(arr)
 
 print("Sorted array:", sorted_arr)
+
+----------_----------------
+class Stack:
+    def __init__(self):
+        self.items=[]
+
+    def push(self,item):
+        self.items.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+        else:
+            return None
+
+    def is_empty(self):
+        return len(self.items)==0
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+        else:
+            return None
+def match_parentheses(expression):
+    stack=Stack()
+    mapping={")":"(","}":"{","]":"["}
+
+    for char in expression:
+        if char in mapping.values():
+            stack.push(char)
+        elif char in mapping.keys():
+            if stack.is_empty() or mapping[char]!=stack.pop():
+                return False
+    return stack.is_empty()
+expression="([{}])"
+print(match_parentheses(expression))
+expression="([{}]"
+print(match_parentheses(expression))
+expression="({[]})"
+print(match_parentheses(expression))
+expression="({[}])"
+print(match_parentheses(expression))
